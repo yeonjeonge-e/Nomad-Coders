@@ -1,0 +1,37 @@
+2024. 06 . 18 2일차 퀴즈
+
+[ NomadCoders JS Challenges ]
+
+Q1. 2 and 2.2 are both integers.
+--> No
+
+Q2. What is the data type of “2”?
+--> String
+
+Q3. ‘hello’ is the same as “hello”
+--> Yes
+
+Q4. A variable can only hold number values.
+--> No
+
+Q5. After creation, we can change the value of a const.
+--> No
+
+Q6. After creation, we can change the value of a let.
+--> Yes
+
+Q7. “true” is a boolean value.
+--> No
+
+Q8. null and undefined are the same type.
+--> No
+
+Q9. Why do we use an array for?
+--> To organize values on a list.     [O]
+--> To create many variables quickly  [X]
+
+Q10. How can I get the second element of an array?
+--> arr[1]
+
+Q11. How can I access the name property of an object player?
+--> player["name"]
