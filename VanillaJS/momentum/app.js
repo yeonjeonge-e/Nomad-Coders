@@ -384,6 +384,7 @@ title.addEventListener("mouseleave", handleMouseLeave);
 
 
 // [3-5]
+/**
 const h1 = document.querySelector("h1");
 
 function handleTitleClick() {
@@ -424,3 +425,145 @@ window.addEventListener("resize", handleWindowResize);
 window.addEventListener("copy", handleWindowCopy);
 window.addEventListener("offline", handleWindowOffline);
 window.addEventListener("offline", handleWindowOnline);
+*/
+
+
+
+
+
+// [3-6]
+/**
+// const h1 = document.querySelector("h1");
+
+// function handleTitleClick() {
+//   if(h1.style.color === "blue") {
+//     h1.style.color = "tomato";
+//   } else {
+//     h1.style.color = "blue";
+//   }
+// }
+
+// h1.addEventListener("click", handleTitleClick);
+
+
+// 위 코드를 간결하게 정리
+const h1 = document.querySelector("h1");
+
+function handleTitleClick() {
+
+  const currentColor = h1.style.color;
+  let newColor;
+
+  if(currentColor === "blue") {
+    newColor = "tomato";
+  } else {
+    newColor = "blue";
+  }
+  h1.style.color = newColor;
+}
+
+h1.addEventListener("click", handleTitleClick);
+
+// ★ addEventListener 문법 ★
+// 요소명.addEventListener("이벤트명", 실행할 함수);
+
+// 여기에서 사용하는 상수 h1 이란? 
+// body > div > h1 를 가리킨다 --- 난 제목태그인 h1을 그래로 상수이름으로 사용 
+// h1이라는 상수에 addEventListener를 추가했는데,
+// 내가 querySelector로 지정한 첫번 째 h1 태그를 클릭 시, 이벤트 발생
+
+// h1의 첫번째 text를 클릭하면 text 색상이 blue로 변경되는데
+// if문에 의해 색상이 블루면 새로운 컬러인 tomato로 변경
+// 그러면 text의 색상이 blue가 아닌 tomato 색상으로 변경되므로
+// else문이 실행되어 다시 blue로 변경된다
+
+// 여기에서 const(상수)와 let(변수)로 선언자를 구분한 이유 ?
+// const currentColor = h1.style.color;
+// let newColor;
+// 이벤트리스너에 의해 h1 태그 클릭 시 text 색상은 blue로 변경됨 - main
+// -> if / else 문이 없어도 h1의 색상은 blue로 변하는함수라 바꾸지 않음 - const
+// 근데 위 함수는 if / else 문에 의해 색상이 바뀌므로 변하는 값 - let 설정
+*/
+
+
+
+
+
+// [3-7] CSS 사용
+/**
+const h1 = document.querySelector("h1");
+
+function handleTitleClick() {
+
+  const clickedClass = 'clicked';
+
+  if (h1.className === clickedClass) {
+    h1.className = "";
+  } else {
+    h1.className = clickedClass;
+  }
+  // h1.className == getter and setter
+  // === : 양쪽의 값이 같은지 확인
+  // = : 우측 값을 좌측에 대입(변경)
+}
+
+h1.addEventListener("click", handleTitleClick);
+*/
+
+
+
+
+
+// [3-8]
+// (1)
+// const h1 = document.querySelector("h1");
+
+// function handleTitleClick() {
+
+//   const clickedClass = 'clicked';
+
+//   if (h1.classList.contains(clickedClass)) {
+//     h1.classList.remove(clickedClass);
+//   } else {
+//     h1.classList.add(clickedClass);
+//   }
+  // h1.className == getter and setter
+  // === : 양쪽의 값이 같은지 확인
+  // = : 우측 값을 좌측에 대입(변경)
+// }
+
+// h1.addEventListener("click", handleTitleClick);
+
+
+// (2)
+const h1 = document.querySelector("h1");
+
+function handleTitleClick() {
+  h1.classList.toggle("clicked");
+}
+h1.addEventListener("click", handleTitleClick);
+
+// ★ toggle ★
+//  h1의 classList에 clickedClass가 이미 있는지 확인 후
+//  만약 있다면 toggle이 clicked를 제거해줌
+//  만약 h1의 classList에 clicked가 존재하지 않는다면
+//  toggle은 clicked를 classList에 추가해줌
+// 버튼을 누르면 불빛이 나오고 다시 한번 누르면 불빛이 꺼지는 거와 같은 원리
+
+// 댓글 설명
+// classList 우리가 class들의 목록으로 작업할수 있게끔 허용해준다.
+// className은 이전 class를 상관하지않고 모든걸 교체해 버린다.
+
+// classList를 이용하는건
+// js에서 건드리는건 HTML element가 가지고있는 또하나의 요소 사용하는 것이다.
+// = element의 class내용물을 조작하는 것을 허용한다는 뜻
+
+// contains은 우리가 명시한 class가 HTML element의 class에 포함되어 있는지 말해준다
+
+// toggle은 토큰이 존재하면 토큰제거
+// 토큰존재 하지않으면 토큰 추가
+
+// ex)
+// toggle은 h1의 classList에 clicked class가 이미있는지 확인하여
+// 만약있다면 toggle 이 clicked를 제거해준다
+// 만약 class name이 존재하지 않는다면 toggle은 classname 추가
