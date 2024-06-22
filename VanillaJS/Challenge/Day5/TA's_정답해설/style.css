@@ -1,0 +1,15 @@
+h1 {
+  color: white;
+}
+
+.bigScreen {
+  background-color: gold;
+}
+
+.mediumScreen {
+  background-color: violet;
+}
+
+.smallScreen {
+  background-color: darkturquoise;
+}
