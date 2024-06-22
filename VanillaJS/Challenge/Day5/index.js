@@ -7,9 +7,9 @@ function handleWindowSize() {
   //   뷰포트의 너비를 기록합니다.
   //   window.innerWidth
 
-  if (size >= 700) {
+  if (size >= 1000) {
     body.style.backgroundColor = colors[0];
-  } else if (size < 700 && size > 400) {
+  } else if (size < 1000 && size > 700) {
     body.style.backgroundColor = colors[1];
   } else {
     body.style.backgroundColor = colors[2];
