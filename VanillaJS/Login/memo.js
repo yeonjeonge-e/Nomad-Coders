@@ -60,6 +60,25 @@ loginButton.addEventListener("click", onLoginBtnClick);
 // 3. form 안에 input 태그가 있어야 함
 
 
+const loginInput = document.querySelector("#login-form input");
+const loginButton = document.querySelector("#login-form button");
+
+function onLoginBtnClick() {
+  const username = loginInput.value;
+  // if (username === "") {
+  //   alert("이름을 입력해줘");
+  // } else if (username.length > 15) {
+  //  ★ username.length : username의 string 길의
+  //   alert("이름이 너무 길어");
+  // }
+
+  // if ~ else if 문은 선호하는 방식이 아니라 다른 방식으로 작성할 것
+  console.log(username);
+}
+
+loginButton.addEventListener("click", onLoginBtnClick);
+
+
 // ★★★★★
 // 반드시! form > input 이 들어가야 함
 // [ input > button ] or [ input type = submit ]인 화면의 버튼을
@@ -74,3 +93,43 @@ loginButton.addEventListener("click", onLoginBtnClick);
 // 브라우저가 새로고침을 하지 않고 username의 정보를 저장하고 싶음
 // 하지만 form이 submit 될 때 마다 새로고침이 되어 저장이 안됨
 // 이 문제를 해결해야 함!
+
+
+
+
+
+// [ 4-2 Events ]
+
+// - button의 클릭 여부가 아닌 form의 submit에 초점 맞춰야함
+// - submit이라는 event가 발생하는 것을 아예 막거나,
+//   중간에 개입해서 submit event가 발생했다는 것을 알려주길 원함
+
+
+const loginForm = document.querySelector("#login-form");
+const loginInput = document.querySelector("#login-form input");
+
+function onLoginSubmit(event) {
+  event.preventDefault();
+  // preventDefault() : 함수의 기본값(행동)을 하지 못하게 막는 함수
+  //                     ㄴ 기본값? form을 submit 하면 새로고침 되는 현상  
+  // const username = loginInput.value;
+  // console.log(event);
+  console.log(loginInput.value);
+  // 내가 입력한 값에 대한 정보가 콘솔에 출력 됨 -- 버튼 클릭해도 새로고침 안됨
+
+  // 위 함수에서 하고 있는 것은 ?
+  // 1. onLoginSubmit 이라는 함수를 만들고
+  // 2. 이 함수가 event라는 하나의 argument를 받도록 하는 것
+
+  // console.log(event); input에 값을 넣고 입력하면 ?
+  // SubmitEvent {isTrusted: true, submitter: input, type: 'submit', target: form#login-form, currentTarget: form#login-form, …}
+  // 위와 같은 형식으로 값이 출력되긴 함
+
+  // ★ onLoginSubmit 함수에서 하나의 event 라는 argument를 받고,
+  //    그것을 js에 넘겨주는 것
+}
+
+loginForm.addEventListener("submit", onLoginSubmit);
+
+// 모든 eventListener function의 첫번째 argument는 항상
+// 지금 막 벌어진 일들에 대한 정보가 됨
