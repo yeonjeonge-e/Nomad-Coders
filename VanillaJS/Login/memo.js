@@ -133,3 +133,47 @@ loginForm.addEventListener("submit", onLoginSubmit);
 
 // 모든 eventListener function의 첫번째 argument는 항상
 // 지금 막 벌어진 일들에 대한 정보가 됨
+
+
+
+
+
+// [ 4-3 Events part Two ]
+
+// form의 기본 동작
+// ㄴ submit
+
+// 링크의 기본 동작
+// ㄴ 다른 페이지로 이동
+
+// 엣지 : PointerEvent 
+// 크롬 : MouseEvent
+
+// ★★★
+// addEventListener 안에 있는 함수는 직접 실행하지 않는다
+// 브라우저가 실행시켜주고 브라우저에서 해당 이벤트에 대한 정보
+// 즉, object를 가지게 된다.
+
+// 해당 이벤트가 가진 기본 Default값을 발생시키지 않기 하게 위해선
+// preventDefault를 이용하여 막을 수 있다
+
+
+const loginForm = document.querySelector("#login-form");
+const loginInput = document.querySelector("#login-form input");
+
+const link = document.querySelector("a");
+
+function onLoginSubmit(event) {
+  event.preventDefault();
+  console.log(loginInput.value);
+}
+
+function handleLinkClick(event) {
+  event.preventDefault();
+  // preventDefault로 인해 링크를 클릭해도 사이트로 넘어가지 않음
+  console.dir(event);
+  // alert("clicked");
+}
+
+loginForm.addEventListener("submit", onLoginSubmit);
+link.addEventListener("click", handleLinkClick);
