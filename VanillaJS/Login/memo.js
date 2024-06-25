@@ -237,3 +237,49 @@ loginForm.addEventListener("submit", onLoginSubmit);
 // - 우리가 유저를 기억하지 못함
 // - 새로고침 할 때마다 새로 로그인을 해야함
 // - 새로고침 할 때도 form을 볼 필요 없이 이름이 저장되게 하고 싶음
+
+
+
+
+
+// [ 4-5 Saving Username ]
+
+// local storage
+// - 우리가 브라우저에 무언가를 저장할 수 있게 해주는 역할
+
+// 개발자도구 - 콘솔창에서
+// - localStorage.setItem("username", "yeonjeong") 입력해주고
+// 개발자도구 - 애플리케이션 - 로컬 스토리지 - http://~ 클릭
+// - http://~ 사이트에 키:username, 값:yeonjeong 값이 DB에 저장됨
+// 개발자도구 - 콘솔창에서
+// - localStorage.getItem("username"); 입력하면?
+// -> "yeonjeong" 출력
+
+// local storage에 저장된 값 삭제
+// 개발자도구 - 콘솔창에서
+// - localStorage.removeItem("username"); 하고 애플리케이션에서 확인해보면 값이 삭제 됨
+
+
+const loginForm = document.querySelector("#login-form");
+const loginInput = document.querySelector("#login-form input");
+const greeting = document.querySelector("#greeting");
+
+const HIDDEN_CLASSNAME = "hidden";
+
+function onLoginSubmit(event) {
+  event.preventDefault();
+  loginForm.classList.add(HIDDEN_CLASSNAME);
+  const username = loginInput.value;
+  // greeting.innerHTML = "Hello " + username;
+  localStorage.setItem("username", username);
+  // 애플리케이션에서 내가 입력한 username이 키와 값에 저장됨
+  greeting.innerHTML = `Hello ${username}`;
+  greeting.classList.remove(HIDDEN_CLASSNAME);
+}
+
+loginForm.addEventListener("submit", onLoginSubmit);
+
+// 여기까지 코드의 문제점
+// - 새로고침을 하면 여전히 form이 표시됨
+// 개선점) local storage에 username이 존재하는지 확인 후 form 표시하지 않고 바로 h1 요소 표시
+//         만약 local storage에 username이 없다면, form이 먼저 표시되도록 하기
