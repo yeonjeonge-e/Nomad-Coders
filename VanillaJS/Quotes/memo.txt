@@ -1,0 +1,47 @@
+Math.random()
+- 0 부터 1 사이의 랜덤한 숫자를 제공
+- 0.123 ~ 0.987 등등
+
+Math.random() * 10
+- 10을 곱해주면 0 - 10 사이의 숫자를 제공
+- 0.123 ~ 10.987 등등
+
+
+Math.round()
+- 소수점 반올림
+- 1.0 ~ 1.4   1
+- 1.5 ~ 1.9   2
+
+Math.ceil()
+- 소수점 올림
+- 1.0 ~ 1.9   2
+
+Math.floor()
+- 소수점 내림
+- 1.0 ~ 1.9   1
+
+
+
+
+
+★ createElement ★
+문법 : createElement(tagName);
+- JavaScript에 HTML 문서에 지정한 태그의 요소 생성
+- (Ex) document.createElement("button);
+-      페이지 내에 button 태그 생성됨
+- 단, 요소는 생성되었지만?
+  어디에 위치할지에 대한 HTML 코드는 작성하지 않았기 때문에
+  문서 내에서 보이지 않음
+
+
+
+★ appendChild ★
+문법 : 요소.appendChild(자식요소);
+- 특정 부모 노드의 자식 노드 리스트 중 마지막 자식으로 추가
+- 즉, 새로운 요소를 자식 요소로 추가하는 것
+
+
+
+★ prependChild ★
+- append : 가장 뒤
+- prepend : 가장 위
