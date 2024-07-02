@@ -24,6 +24,9 @@ function saveToDos() {
   //     => 객체를 문자열로 바꿔주어요
   // 중복값도 입력됨
   // 대신 새로고침 하면 값은 사라짐
+
+  // Delete [11-3]
+  // 이제 saveToDos 함수에서 toDos에 text를 저장하지 않고 object를 저장하게 된다  
 }
 
 // [5-3]
@@ -59,6 +62,32 @@ function deleteToDo(event) {
   //             새로고침을 하면 localStorage에서 저장된 값들을 불러와서 화면에 보여주게끔 하는 것
   // toDos = toDos.filter((toDo) => toDo.id !== parseInt(li.id));
   // saveToDos();
+
+
+  // Delete [11]
+  // deleteToDo 함수는 화면에서 어떤 HTML의 element를 지워야 하는지는 알지만,
+  // 어떤 todo Text를 DB에서 지워야 하는지는 모름
+  // 현재 상황 : input값이 들어오면 화면에서 x 버튼으로 삭제는 가능
+  //             하지만 내가 클릭한 데이터 값에 대한 각각의 id은 모름
+  // 진행 방법 : 1. 랜덤으로 ID를 만드는 방법을 보여줄 것
+  //                ID란, element가 만들어질 때 갖게 될 ID 값
+  //                - ID값이 무작위한 랜덤 숫자는 아니고,
+  //                  Date.now() 함수를 이용할 것임   --   밀리초(1/1000)초를 주는 함수
+
+
+  // Delete [13]
+  toDos = toDos.filter((toDo) => toDo.id !== parseInt(li.id));
+  // - toDo : toDos DB에 있는 요소 중 하나
+  //        - 이 함수는 DB에 있는 모든 것과 함께 실행이 된다
+  // ((toDo) => toDo.id !== li.id)
+  // - 위 문장 의미 : 우리가 클릭한 li.id값과는 다른 toDo의 값은 남기고 싶어
+
+  // 위 문장 추가 후 input에 값 넣고 실행시켰는데 제대로 안되는 이유는 ?
+  // li.id의 값을 console.log(typeof li.id) 값을 해보면 li.id 값은 String 문자열로 출력된다
+  // ★ li.id = string,  toDo.id = number  두 개의 문자열 타입이 달라서 올바른 결과물 출력이 안됨
+  //    (li.id) 값을 parseInt(li.id)로 형변환 시켜주고
+  //.   toDos DB에서 todo를 지운 후 saveToDos() 함수를 한번 더 불러와줘야 함 !
+  saveToDos();
 }
 
 
@@ -70,12 +99,22 @@ function paintToDo(newTodo) {
   // console.log("i will paint", newTodo);
   // [4-4]
   const li = document.createElement("li");
-  // li.id = newTodo.id;
+
+  // Delete [11-6 /]
+  li.id = newTodo.id;
+  // li의 id 값에 newTodoObj.id가 아닌 newTodo.id값인 이유 ?
+  // - paintToDo 함수는 newTodo 라는 이름의 인수의 값으로
+  //    newTodoObj 라는 object를 받고 있기 때문에 함수 안에서 newTodo.id를 사용하고 있는 것
+
   const span = document.createElement("span");
 
   // [4-6]
-  span.innerText = newTodo;     // innerText을 span 내부에 넣음
+  // span.innerText = newTodo;     // innerText을 span 내부에 넣음
   // span 안에 넣은 새로운 텍스트(innerText)는 사용자가 form에서 우리에게 준 newTodo 값
+
+  // Delete [11-5]
+  // span.innerText = newTodo; 가 아닌 newTodo.text로 변경
+  span.innerText = newTodo.text;
 
 // [5] ToDo 삭제하는 버튼 만들기
   const button = document.createElement("button");
@@ -134,19 +173,46 @@ function handleToDoSubmit(event) {
   // - input에 값 입력 후 enter 치면 값을 비워주지만, 저장은 안됨 - 저장하는 코드 만들기
   // console.log(newTodo, toDoInput.value);
 
+  // Delete [11-1]
+  const newTodoObj = {
+    text: newTodo,
+    id: Date.now(),
+  };
+
   // [6-1 /]
-  toDos.push(newTodo);
+  // - toDos.push(newTodo);
   // - a, b, c를 입력 후 콘솔에 toDos를 입력하면?
   // - (3) ['a', 'b', 'c'] 이런식으로 array 형태 값이 출력됨
   // - 나는 이제 이 값들을 localStorage에 넣고 싶음
   // - 근데? localStorage에는 array 값은 저장이 불가능함
   // -      localStorage에는 오직 "텍스트"만 저장 가능함
 
+  // Delete [11-2]
+  // - toDos.push(newTodo); 코드에 newTodo 대신 newTodoObj를 push 해줌
+  // 그러면 이제 id값이 포함된 object를 저장하게 됨
+  toDos.push(newTodoObj);
+
   // [4-1]
-  paintToDo(newTodo);
+  // paintToDo(newTodo);
   // paintToDo 함수에 newTodo인자를 넣고 실행시켜주면?
   // - paintToDo는 무엇을 그려야 할 지 알게 됨
   // - 그래서 paintToDo() 함수에서 console.log()로 확인해줌
+
+  // Delete [11-4]
+  // - paintToDo(newTodo); 코드해석 : paintToDo는 오직 text인 newTodo만 갖고 있음
+  //                                  그래서 이걸 object로 바꿔줄거임
+  //                       어떻게 ? : paintToDo에서 string으로 newTodo 주는 대신, newTodoObj 줌
+  paintToDo(newTodoObj);
+  // 새로 추가한 코드 설명
+  // - toDos 배열에 newTodoObj를 push 후
+  // - paintToDo에는 text가 아닌 newTodoObj 값을 줄거임
+  // 그런데) 이렇게 추가해주면 화면에 글자를 입력하면 [object Object] 라고 뜨게 됨
+  //         나는 [object Object] 이런 문구가 아닌 내가 입력한 실제 문자를 보고 싶음
+  //         - 그렇다면? paintToDo 함수를 변경해줘야함
+  //         - 현재 paintToDo()는 newTodo인 text 값을 받고 있는데, 이제는 object로 받음
+  //         - 왜?  handleToDoSubmit() 에서 object는 text와 id값을 갖고 있음
+  //           즉. span.innerText = newTodo.text 로 변경되어야 함
+
 
 
   // const newTodoObj = {
@@ -215,7 +281,7 @@ if (savedToDos !== null) {
   // }
 
 
-  // [10-2]
+  // [10-2 /]
   toDos = parsedToDos;
   // "let toDos = [];" 시작 시, localStorage 에서 발견되는 이전의 toDos들로 하고싶은 것임
   // 이 코드를 추가해주면 기존 값 입력 & 새로고침 후 새로운 값을 입력해도 기존 입력한 데이터 남아있음
@@ -250,4 +316,37 @@ if (savedToDos !== null) {
   // application이 시작될때 "const toDos = [];"를 빈값으로 시작하는 대신,
   // const를 let으로 변경해 업데이트가 가능하게 만든 후,
   // localStorage에 toDo값들이 들어있으면 toDos에 parsedToDos를 넣어서 전에 있던 toDos를 복원하기
+
+
+  // Delete [12]
+  // forEach() 함수는 paintToDo를 parseToDos 배열의 요소마다 실행한다
+  // 여기서 중요한점은, forEach는 paintToDo를 기본적으로 실행하는데
+  // forEach는 각각의 item을 줘서 item이 object가 된다
 }
+
+  // Delete [12-1 /]
+  // array에서 값을 삭제할 때는 실제로 array에서 지우는게 아닌 
+  // 지우고 싶은 item을 빼고 새로운 array를 만든다 == item을 지우는게 아닌 item을 제외하는 것
+
+  // array의 모든 element를 유지하는 sexyFilter 함수 만들기
+  function sexyFilter() {
+    return true;
+  }
+    // sexyFilter 역할
+    // - ★ 반드시 true값을 리턴해야함
+    // - 만약 새 array에서 이 object 를 유지하고 싶다면 sexyFilter 함수는 반드시 true 리턴해야함
+    // ★ 이 함수에서 true값이 아닌 false값을 리턴한다면?
+    //    - 비어있는 array 가 만들어지게 된다
+
+    /** 완전 중요
+    const todos = [{text: "disend"}, {text: "duswjd"}, {text: "haru"}]
+    -> undefined
+    funtion nomaFilter(popo) { return popo.text !== "haru"}
+    -> undefined
+    todos.filter(nomaFilter)
+    ->  (2) [{…}, {…}]
+          0 : {text: 'disend'}
+          1 : {text: 'duswjd'}
+          length : 2
+          [[Prototype]] : Array(0)
+    */
