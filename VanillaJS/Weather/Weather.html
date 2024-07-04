@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Weather.css">
+  <title>Weather</title>
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <div id="weather">
+    <span></span>
+    <span></span>
+  </div>
+
+  <script type="module" , src="ApiKey.js"></script>
+  <script type="module" , src="Weather.js"></script>
+  <!--
+  - 해당 KEY를 불러올 파일 : Weather.js
+  - KEY값이 들어있는 파일 : ApiKey.js
+  즉, ApiKey.js 내부에 있는 값을 -> Weather.js가 내려받아 사용해야 하므로.
+    ApiKey.js를 연결하는 위치가 Weather.js보다 위쪽에 위치해야 함
+    그래야 ApiKey.js 파일을 먼저 읽고 그 데이터를 바탕으로 Weather.js 파일을 읽는다
+  -->
+</body>
+
+</html>

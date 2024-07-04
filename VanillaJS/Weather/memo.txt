@@ -1,0 +1,116 @@
+[ Weather API ]
+
+1. 사이트 회원가입
+   https://openweathermap.org/
+
+
+
+2. 사이트에서 API call 코드 주소창에 복붙
+   https://openweathermap.org/current
+
+
+
+3. 아래 코드를 주소창에 붙여넣고 lat(latitude), lon(longitude) 값에 실제 내 주소값 넣어주기
+   https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
+
+
+
+4. lat={lat}&lon={lon}   --->   lat=37.1720192&lon=127.1496704
+   -> https://api.openweathermap.org/data/2.5/weather?lat=37.1720192&lon=127.1496704&appid={API key}
+
+
+
+5. {API key} 키 값 얻기
+   - 내 profile -> API keys -> Key 값 복사
+   -> config.API_KEY
+   -> &appid={API key}   --->   &appid=config.API_KEY
+
+
+
+6. 위 순서대로 주소창에 값을 입력해주기
+https://api.openweathermap.org/data/2.5/weather?lat=37.1720192&lon=127.1496704&appid=config.API_KEY
+
+
+
+6-1. config.API_KEY
+      === ApiKey.js
+
+
+
+7. 주소창 실행 시 401 에러가 뜬다면?
+ {
+   "cod": 401,
+   "message": "Invalid API key. Please see https://openweathermap.org/faq#error401 for more info."
+ }
+
+  7-1. 가입 시 적었던 이메일 계정의 메일로 들어가서 계정 확인 해주기
+
+  7-2. 최소 1분 ~ 두시간 정도 소요될 수 있음
+
+
+
+8. api 링크를 깔끔하게 보고 싶다면 ?
+
+  8-1. 크롬확장 프로그램중에 Json viewer 설치하기
+
+
+
+9. 결과 값
+  {
+    "coord": {
+        "lon": 127.1497,
+        "lat": 37.172
+    },
+    "weather": [
+        {
+            "id": 804,
+            "main": "Clouds",
+            "description": "overcast clouds",
+            "icon": "04n"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 23.19,
+        "feels_like": 23.73,
+        "temp_min": 22.63,
+        "temp_max": 23.87,
+        "pressure": 1003,
+        "humidity": 83,
+        "sea_level": 1003,
+        "grnd_level": 982
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 7.2,
+        "deg": 240
+    },
+    "clouds": {
+        "all": 100
+    },
+    "dt": 1720120518,
+    "sys": {
+        "type": 1,
+        "id": 8099,
+        "country": "KR",
+        "sunrise": 1720124205,
+        "sunset": 1720176891
+    },
+    "timezone": 32400,
+    "id": 6575822,
+    "name": "Sangdeok",
+    "cod": 200
+  }
+
+
+
+
+
+⚠️ 주의사항 ⚠️
+
+Uncaught SyntaxError: 
+Unexpected token 'export' export default config;
+Cannot use import statement outside a module import config from "./ApiKey.js";
+
+위와 같은 오류 문구가 발생하는건 export로 인해 생긴 문제다
+HTML 코드 script 부분에  type = "module"  을 추가해주면 오류 해결 !
