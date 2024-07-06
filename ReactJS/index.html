@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <!-- #root -->
+  <!--  설명1) 비어있는 div 생성 - ReactDOM이 React element들을 가져다놓을 곳 -->
+</body>
+
+<!-- React JS 설치하기 위해서 아래에 있는 두개의 js코드를 import 해야함 (24/7/6 최신버전)
+      & 실행하면 오류 없이 뜨며, 콘솔창에서 React 입력하면 React를 부를 수 있게 된 것-->
+<script src="https://www.unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+
+<script>
+  const root = document.getElementById("root");
+  // 설명2) 위에서 비어있는 div 생성한 root div를 가져온 후
+  const h3 = React.createElement(
+    "h3",
+    {
+      onMouseEnter: () => console.log("Mouse Enter"),
+    },
+    "Hello, potato "
+  );
+  const btn = React.createElement(
+    "button",
+    {
+      onClick: () => console.log("Im clicked"),
+      style: {
+        backgroundColor: "tomato",
+      }
+    },
+    "Click me"
+  );
+  const container = React.createElement("div", null, [h3, btn]);
+
+  ReactDOM.createRoot(root).render(container);
+  // 설명3) React element들을 root div 안에서 보여주라는 뜻
+  // ReactDOM.render(container, root);
+  // 위는 18 버전, 아래는 17 버전
+</script>
+
+</html>
+
+
+
+<!--
+  💡 오늘 배운 내용
+  - 바닐라 JS : HTML 만들고 -> 그걸 JS로 가져와서 -> HTML로 수정
+  - 리액트 JS : JS로 시작해서 -> HTML 순서로 진행됨
+                - JS를 이용해 element 생성
+                -> React JS가 HTML로 번역해줌
+  
+  - render : React element를 가지고 HTML로 만들어서 배치한다 === 사용자에게 보여준다
+  - React.createElement(유효한 HTML 태그, property, 보여줄 문자열)
+
+  - props 안에서 event listener를 등록할 수 있음 [아주아주 중요]
+
+
+
+  const h3 = React.createElement(
+    "h3",
+    {
+      onMouseEnter: () => console.log("Mouse Enter"),
+    },
+    "Hello, potato "
+  );
+
+  코드 해석
+  1. element를 생성
+  2. HTML 태그 선택                     -- 첫번째 argument는 root에 들어갈 HTML 태그
+  3. {event 등록}                       -- 두번째 argument는 props가 포함된 object
+  4. HTML에 보여줄 문자열 텍스트 적기     -- 세번째 argument는 content
+
+
+
+  💡 [ React JS 규칙 ]
+  1. HTML을 HTML 페이지에 직접 작성하지 않는다 -- 모두 js & react js 사용
+  2. 상수의 이름과 HTML 태그의 이름이 같을 필요는 없음 -- Ex. <span> 태그라고 const span 안써도 됨
+      대신, 괄호 안에는 생성하고자 하는 HTML 태그와 똑같은 이름을 사용해야 함
+  3. React JS가 결과물인 HTML을 업데이트 할 수 있음 (필요하다는 가정하에)
+
+  ☆ React의 element는 가상 DOM ☆
+    - 실제 HTML 파일을 건드는 것이 아닌, 실제 DOM 안에 React가 만든 가상의 DOM을 심는 작업이다
+  
+  
+  
+  ⭐ React JS
+    - 어플리케이션이 아주 interactive 하도록 만들어주는 library
+    - 엔진과 같은 역할
+
+  ⭐ React-dom
+    - library or package
+    - 모든 React element 들을 HTML body에 배치할 수 있게 해준다
+
+
+
+    자동 정렬 도구 : Pretties
+    - Alt + Shift + F
+-->

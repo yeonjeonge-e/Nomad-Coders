@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <span>Total Clicks: 0</span>
+  <!-- 버튼 클릭의 갯수를 세고 싶어서 만듦 -->
+  <button id="btn">Click me</button>
+
+  <script>
+    let counter = 0;
+    const button = document.getElementById("btn");
+    const span = document.querySelector("span");
+
+    function handleClick() {
+      console.log("I have been clicked");
+      counter = counter + 1;
+      span.innerText = `Total Clicks: ${counter}`;
+      // span.innerHTML = `Total Clicks: ${counter}`;
+      // 이 코드는 HTML 화면 업데이트 (실시간으로 바뀌는걸 보여지게끔)
+    }
+
+    button.addEventListener("click", handleClick);
+
+  </script>
+</body>
+
+</html>
+
+
+
+<!-- 
+  <span> 태그
+    - display: inline;
+    - 줄 바꿈이 안됨 (한 줄에 여러 태그가 이어져 나온다는 뜻)
+
+  <div> 태그
+    - display: block;
+    - 줄 바꿈 가능
+
+
+
+
+
+  [innerText]
+  - element.innerText = "<div style = 'color:red'>A</div>";
+  - element 안의 text 값들만 가져옴
+  - HTML 코드가 문자열 그대로 element 안에 포함된다
+    결과값 => <div style='color:red'>A</div>
+              (내가 입력한 text 그대로 출력)
+
+  [innerHTML]
+  - element.innerHTML = "<div style = 'color:red'>A</div>";
+  - element 안의 HTML 이나 XML 값을 가져옴
+  - HTML element가 element 안에 포함된다
+    결과값 => A
+            (빨간색 대문자 A 출력)
+  
+  
+  ★ https://nack1400.tistory.com/entry/JavaScript-6-innerText-innerHTML-%EC%82%AC%EC%9A%A9%EB%B2%95%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%ED%83%9C%EA%B7%B8-%ED%85%8D%EC%8A%A4%ED%8A%B8-%EC%83%9D%EC%84%B1-%EC%82%BD%EC%9E%85-%EC%88%98%EC%A0%95 ★
+  -- > 완전 직관적으로 설명해주는 블로그 발견
+  
+-->
