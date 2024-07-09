@@ -19,22 +19,26 @@
 
   const root = document.getElementById("root");
 
-  const Title = (
+  const Title = () => (
     <h3 id="title" onMouseEnter={() => console.log("Mouse Enter")}>
       Hello, potato
     </h3>
   );
 
-  const Button = (
-    <button
-      style={{
-        backgroundColor: "tomato",
-      }}
-      onClick={() => console.log("Im clicked")}
-    >
-      Click me
-    </button>
-  );
+  // 위와 아래의 함수 사용 방식은 같음
+
+  function Button() {
+    return (
+      <button
+        style={{
+          backgroundColor: "tomato",
+        }}
+        onClick={() => console.log("Im clicked")}
+      >
+        Click me
+      </button>
+    )
+  };
 
   // const h3 = React.createElement(
   //   "h3",
@@ -55,9 +59,21 @@
   //   "Click me"
   // );
 
-  const container = React.createElement("div", null, [Title, Button]);
+  // const container = React.createElement("div", null, [Title, Button]);
+  const Container = (
+    <div>
+      <Title />
+      <Button />
+      // 컴포넌트의 첫글자는 항상 대문자
+    // 만일, 소문자면 React와 JSX는 이게 함수가 아닌 HTML button 태그라고 생각할 수 있음
+    </div>
+  )
 
-  ReactDOM.createRoot(root).render(container);
+  // ReactDOM.createRoot(root).render(container);
+  // ReactDOM.createRoot(root).render(Container);
+  // ReactDOM.createRoot(root).render(<Container />);
+  ReactDOM.createRoot(root).render();
+  // 74번째 줄이랑 75번째 줄은 같은 뜻
 </script>
 
 </html>
@@ -70,4 +86,17 @@
   <h3> 열었으면 닫아주고, 내용은 태그 사이에 담고 property는 HTML 태그의 속성처럼 적으면 됨
 
   props == propertys
+
+  - JSX는 어플리케이션을 여러 가지 작은 요소로 나누어 관리할 수 있게 해줌
+
+
+
+  div에 const 넣기 위해선
+1. const를 함수로 만들어 줘야함 const Btn = () => ( );
+    -> arrow function 이라고 부름
+    = () => ( ); 는
+    function Btn() { return ( ); } 와 같음
+2. HTML 태그처럼 만들어서 넣어줌
+3. (중요) 컴포넌트의 첫 글자는 반드시 대문자여야 함
+    -> 우리가 직접 만든 요소는 전부 대문자로 시작해야 함
 -->
