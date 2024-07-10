@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+
+  const root = document.getElementById("root");
+
+  let counter = 0;  // 초기값 0
+  function countUp() {
+    counter = counter + 1;
+    // ReactDOM.createRoot(root).render(< Container />);    아래 reRender() 함수로 이동
+    reRender();
+  }
+
+  function reRender() {
+    ReactDOM.createRoot(root).render(< Container />);
+  }
+
+  const Container = () => (
+    <div>
+      <h3>Hello, potato Total Clicks: {counter}</h3>
+      <button onClick={countUp}>Click me</button>
+    </div>
+  );
+
+  // ReactDOM.createRoot(root).render(< Container />);    위 reRender() 함수로 이동
+  reRender();
+
+  /*
+    {counter} : 변수 연결    --    (중괄호 열고 변수 이름 담아주기)
+    이벤트리스너가 countUp함수를 호출하고 countUp은 카운트 바꿔줌 -- (카운트 올려주는 함수 생성)
+
+    <h3>Hello, potato Total Clicks: {counter}</h3>
+    <button onClick={countUp}>Click me</button>
+    위 두줄로만 적어도 카운트는 증가하고 있음   --    콘솔에서 counter 해보면 클릭 횟수 나옴
+    그치만 우리는 눈으로 확인 수 있게끔 UI도 변경하고 싶은 것
+
+    ★ 여기서 UI 업데이트가 안된 이유는?
+      -- const Container 컴포넌트를 단 한번만 렌더링 하고 있기 때문 ★
+
+    ★ 이게 무슨 말이냐 ~
+    countUp(), Container = () 는 둘 다 함수라 바로 실행되지 않음 --- OK?    
+    ReactDOM.createRoot(root).render(< Container />);
+    이 코드는 페이지를 로드했을 때 함수를 실행시켜 줌
+    우리가 Container()를 렌더링하고 root에 담는데,
+    이미 렌더링한 Container는 counter 값으로 0을 갖게 됨
+    왜냐면? 이제 막 페이지가 로드 되었기 때문에 ! 
+
+    리렌더링 해주기 위해서는 ?    
+      한마디로, 우리가 countUp을 호출할 때 마다
+      ReactDOM.createRoot(root).render(< Container />);
+      이 코드를 다시 호출시키고 싶은 것
+      counter = counter + 1; 코드 밑에
+      ReactDOM.createRoot(root).render(< Container />);
+      코드를 한번 더 작성해주면 됨 !!! ★
+
+
+    1. 어플리케이션 시작될 때 Container 렌더링
+    2. 우리가 Container를 렌더링할때, counter는 0
+    3. 이벤트리스너 더해주고 counter 증가
+    4. Container 리렌더링  -  왜? Container를 리렌더링 해주면 - 함수 재호출 - counter 0→1 변경
+
+    위의 과정 반복하기 보단 reRender() 함수를 하나 생성해주면 더 짧은 코드로 빠르게 만들 수 있음
+
+    1. 어플리케이션 시작될 때 counter는 0
+    2. reRender 함수 실행
+    3. reRender 함수는 Container 컴포넌트를 root에 담아줌
+    4. 어플이 시작될 때 Container는 Total Click을 가지고 있고, counter와 연결 되어있음
+    5. counter 초기값은 0   UI
+    6. 이벤트리스너 등록해주면 버튼 클릭 시 countUp 함수가 호출됨
+    7. countUp은 counter를 증가시키고 다시 reRender 호출함
+    8. reRender 함수가 호출되면 똑같은 과정 반복됨
+    9. Container를 root에 담아줌    
+  */
+
+</script>
+
+</html>
+
+<!--
+  💡 오늘 배운 내용
+  state
+- 기본적으로 데이터가 저장되는 곳
+
+위와 같은 방식은 계속해서 reRender 해줘야 하기 때문에 최고의 방법은 아님
+-->
