@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <!-- #root -->
+  <!--  설명1) 비어있는 div 생성 - ReactDOM이 React element들을 가져다놓을 곳 -->
+</body>
+
+<!-- React JS 설치하기 위해서 아래에 있는 두개의 js코드를 import 해야함 (24/7/6 최신버전)
+      & 실행하면 오류 없이 뜨며, 콘솔창에서 React 입력하면 React를 부를 수 있게 된 것-->
+<script src="https://www.unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+
+<script>
+  const root = document.getElementById("root");
+  // 설명2) 위에서 비어있는 div 생성한 root div를 가져온 후
+  const h3 = React.createElement(
+    "h3",
+    {
+      onMouseEnter: () => console.log("Mouse Enter"),
+    },
+    "Hello, potato "
+  );
+  const btn = React.createElement(
+    "button",
+    {
+      onClick: () => console.log("Im clicked"),
+      style: {
+        backgroundColor: "tomato",
+      }
+    },
+    "Click me"
+  );
+  const container = React.createElement("div", null, [h3, btn]);
+
+  ReactDOM.createRoot(root).render(container);
+  // 설명3) React element들을 root div 안에서 보여주라는 뜻
+  // ReactDOM.render(container, root);
+  // 위는 18 버전, 아래는 17 버전
+</script>
+
+</html>
+
+
+
+<!--
+  💡 오늘 배운 내용
+  state
+- 기본적으로 데이터가 저장되는 곳
+-->
