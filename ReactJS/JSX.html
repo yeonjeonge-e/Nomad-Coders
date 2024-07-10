@@ -60,20 +60,20 @@
   // );
 
   // const container = React.createElement("div", null, [Title, Button]);
-  const Container = (
+  const Container = () => (
     <div>
       <Title />
       <Button />
-      // 컴포넌트의 첫글자는 항상 대문자
-    // 만일, 소문자면 React와 JSX는 이게 함수가 아닌 HTML button 태그라고 생각할 수 있음
     </div>
+
+    // 컴포넌트의 첫글자는 항상 대문자
+    // 만일, 소문자면 React와 JSX는 이게 함수가 아닌 HTML button 태그라고 생각할 수 있음
   )
 
-  // ReactDOM.createRoot(root).render(container);
-  // ReactDOM.createRoot(root).render(Container);
-  // ReactDOM.createRoot(root).render(<Container />);
-  ReactDOM.createRoot(root).render();
-  // 74번째 줄이랑 75번째 줄은 같은 뜻
+  ReactDOM.createRoot(root).render(< Container />);
+  // Container도 요소로 사용해주기 위해선
+  // <Title />, <Button /> 처럼 Container도 함수로 만들어주고 태그 형식으로 넣어줘야함
+
 </script>
 
 </html>
