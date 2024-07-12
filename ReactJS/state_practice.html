@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+  const root = document.getElementById("root");
+
+  function Container() {
+    const [counter, setCount] = React.useState(0);
+    const onClick = () => {
+      setCount(counter + 1);
+    };
+
+    return (
+      <div>
+        <h3>Hello, potato Total Clicks: {counter}</h3>
+        <button onClick={onClick}>Click me</button>
+      </div>
+    );
+
+  }
+
+  ReactDOM.createRoot(root).render(< Container />);
+</script>
+
+</html>
+
+
+
+<!--
+Vanilla JS
+
+<body>
+  <div>Hello potato: 0 </div>
+  <button id="btn">Click Me</button>
+
+  <script>
+    let counter = 0;
+    const button = document.getElementById("btn");
+    const div = document.querySelector("div");
+
+    function handleClick() {
+      counter = counter + 1;
+      div.innerText = `Hello potato: ${counter}`;
+    }
+
+    button.addEventListener("click", handleClick);
+  </script>
+</body>
+-->
+
+
+
+<!--
+state 좋지 않은 방법 1
+
+<body>
+  <div id="root"></div>
+</body>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+
+  const root = document.getElementById("root");
+
+  const title = React.createElement(
+    "h3",
+    {
+      onMouseEnter: () => console.log("Mouse Enter"),
+      style: { color: "red" }
+    },
+    "Hello, potato"
+  );
+
+  const btn = React.createElement(
+    "button", { onClick: () => console.log("Click"), style: { backgroundColor: "blue" } }, "Click Me"
+  );
+
+  const container = React.createElement("div", null, [title, btn]);
+  ReactDOM.createRoot(root).render(container);
+</script>
+-->
+
+
+
+<!--
+JSX
+*** 중요
+const 함수명 = () => ();
+            중괄호  중괄호  ***
+
+<script type="text/babel">
+  const root = document.getElementById("root");
+
+  const Title = () => (
+    <h3 id="title" onMouseEnter={() => console.log("Mouse Enter")}>
+      Hello, potato
+    </h3>
+  );
+
+  const Button = () => (
+    <button onCLick={() => console.log("Im clicked")}>
+      Click Me
+    </button>
+  );
+
+  const Container = () => (
+    <div>
+      <Title />
+      <Button />
+    </div>
+  );
+
+  ReactDOM.createRoot(root).render(< Container />);
+</script>
+-->
