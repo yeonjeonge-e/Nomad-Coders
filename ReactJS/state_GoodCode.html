@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+
+  const root = document.getElementById("root");
+
+  function App() {
+    const [counter, setCounter] = React.useState(0);
+    const onClick = () => {
+      setCounter(counter + 1);
+      // setCounter(counter ++);
+      // counter가 const로 선언되어 있어서 불가능, ++ 하고 싶으면 const -> let 변경
+      // ㄴ let, ++ 로 변경하니까 더블클릭을 해야 카운트가 1씩 올라감
+    }
+    console.log("rendered");
+    console.log(counter);
+    return (
+      <div>
+        <h3>Hello, potato Total Clicks: {counter}</h3>
+        <button onClick={onClick}>Click me</button>
+      </div>
+    );
+  }
+
+  ReactDOM.createRoot(root).render(< App />);
+
+</script>
+
+</html>
+
+<!--
+  💡 오늘 배운 내용
+  ⭐ modifier 함수를 사용해 state, 즉 어플리케이션의 데이터를 바꿀 때
+      modifier 함수로 state를 바꿀 때, 컴포넌트 전체가 재 생성된다
+
+  ⭐ modifier 함수를 이용해서 state를 바꾸면,
+      이 컴포넌트가 재생성되고 App() 함수 코드가 다시 한번 실행됨
+      return 부분도 한번 더 실행되지만, 이번에는 새로운 값으로 실행됨
+    -- 다시 말해서, 우리가 counter를 1로 세팅하면 리렌더링이 일어난다
+    -- 말 그대로 모든 요소를 새로운 값을 가지고 재생성하고 있기 때문임
+
+
+
+  - React.useState()    함수의 콘솔값은 [undefined, f]  -  undefined값과 함수 하나 출력
+  - React.useState()    함수는 초기값 설정해줄 수 있음
+  - React.useState(0)   0이라는 초기값을 지정해주고 콘솔 출력 해보면
+                        - [0, f] 출력
+                        - 초기값 0, 이 data의 값을 바꿔줄 수 있는 함수가 들어있는 배열이 나옴
+                        - 이 두 요소가 만나 BadCode에서 만들었던
+                          (countUP)함수의 역할을 대신하고 있음
+
+  - let counter = 0;
+    function countUp() { code ~~ }
+  
+  - const data = React.useState(0);
+
+  위 두 코드의 역할은 같다
+
+
+  const [counter, modifier] = React.useState(0);
+  이와 같은 문법을 destructuring assignment( 구조 분해 할당 ) 이라고 함
+
+  ★ 구조 분해 할당 ★
+  - 객체나 배열을 변수로 '분해' 할 수 있게 해주는 문법
+
+    -- 이름과 성을 요소로 가진 배열
+    let arr = ["Bora", "Lee"]
+
+    -- 구조 분해 할당을 이용해
+    -- firstName엔 arr[0]을
+    -- surname엔 arr[1]을 할당하였습니다.
+    let [firstName, surname] = arr;
+
+    alert(firstName); // Bora
+    alert(surname);  // Lee
+
+
+
+  < BadCode 설명 >
+  1. counter가 0인 시점에서 최초로 렌더링 할 거임
+  2. counter 값을 증가시킬 때 리렌더링 함   1, 2, 3, ~
+  3. 한번 더 렌더링 하려면, 초기 컴포넌트가 초기 데이터를 가지고 렌더링 되고,
+      버튼 클릭 시 다시 렌더링 되게 끔 하기
+  & 위 방법은 계속 함수를 불러줘야 해서 안좋음    --    Bad
+
+
+
+  < GoodCode 설명 >
+  - 우리가 하려는건 지금까지 진행한 부분을 전부 삭제하고
+    & React.js 어플 내에서 데이터 보관
+    & 자동으로 리렌더링을 일으킬 수 있게 하는 방법    --    Best
+
+
+
+
+
+  < 댓글 추가 설명 >
+  React.useState() 배열에서
+  보통 데이터에는 counter처럼 원하는대로 붙이고
+  f는 set 뒤에 데이터 이름을 붙임 (setCounter)
+  어떤값을 부여하던 setCounter 함수는 그 값으로 업데이트하고 리렌더링 일으킴
+
+  1. counter라는 데이터를 받음
+  2. return()에 그 데이터를 담고 있음 (리턴은 사용자가 보게될 컴포넌트)
+  3. 버튼이 클릭되면 counter값을 바꿔줄 함수 호출 -> setCounter
+  4. counter의 새로운 값을 가지고 counter 함수를 호출
+  5. 그 새로운 값은 setCounter(counter + 1)에 써준 counter + 1
+
+
+
+  const Button = () => ( 내용 )     내용 반환
+  const onClick= () => { 내용 }     아무것도 반환 안함
+-->
